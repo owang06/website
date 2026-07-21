@@ -1,18 +1,16 @@
 /**
- * Garden sections — flowers sit mid-right so the giant left tree can frame them.
+ * Garden sections — natural flower sizes and placements.
  */
 export const sections = [
   {
     id: 'experience',
     label: 'Experience',
     flower: {
-      petal: '#c75b6a',
-      petalDeep: '#7a2e3a',
-      petalLight: '#f0b4bc',
-      center: '#f0d060',
-      centerDeep: '#b8862a',
-      left: '28%',
-      bottom: '14%',
+      petal: '#c45a8a',
+      left: '31%',
+      bottom: '2%',
+      size: 1.12,
+      rotate: -5,
     },
     content: {
       title: 'Experience',
@@ -23,13 +21,11 @@ export const sections = [
     id: 'projects',
     label: 'Projects',
     flower: {
-      petal: '#6a6cae',
-      petalDeep: '#35366e',
-      petalLight: '#b4b6e0',
-      center: '#e8c84a',
-      centerDeep: '#9a7a22',
-      left: '46%',
+      petal: '#f0f0e8',
+      left: '48%',
       bottom: '10%',
+      size: 0.72,
+      rotate: 7,
     },
     content: {
       title: 'Projects',
@@ -40,13 +36,11 @@ export const sections = [
     id: 'about',
     label: 'About',
     flower: {
-      petal: '#e0a84a',
-      petalDeep: '#9a6520',
-      petalLight: '#f5d890',
-      center: '#d4a830',
-      centerDeep: '#8a6818',
-      left: '64%',
-      bottom: '16%',
+      petal: '#e07040',
+      left: '63%',
+      bottom: '1%',
+      size: 0.98,
+      rotate: 2,
     },
     content: {
       title: 'About',
@@ -57,13 +51,11 @@ export const sections = [
     id: 'contact',
     label: 'Contact',
     flower: {
-      petal: '#4a9a72',
-      petalDeep: '#246044',
-      petalLight: '#9ad4b0',
-      center: '#e8cc58',
-      centerDeep: '#a8892e',
-      left: '82%',
-      bottom: '12%',
+      petal: '#5a6ab0',
+      left: '77%',
+      bottom: '8%',
+      size: 0.8,
+      rotate: -7,
     },
     content: {
       title: 'Contact',

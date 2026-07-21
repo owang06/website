@@ -1,10 +1,10 @@
 import SkyTitle from './SkyTitle'
 import Flower from './Flower'
+import TreeSign from './TreeSign'
 
 /**
- * Multi-layer painted meadow (back → front):
- * sky → hills/trees → mid (house/pond/horses) → grass → flowers → giant tree
- * Framer Motion later: parallax per layer on pointer move.
+ * Multi-layer meadow (back → front):
+ * sky → far (mountains/castle) → hills → mid (barn/pond/animals) → grass → flowers → tree
  */
 export default function Garden({
   sections,
@@ -29,16 +29,19 @@ export default function Garden({
     >
       <div className="scene" aria-hidden="true">
         <div className="layer layer-sky">
-          <img src="/layer-sky.png" alt="" draggable={false} />
+          <img src="/layer-sky.png?v=36" alt="" draggable={false} />
+        </div>
+        <div className="layer layer-far">
+          <img src="/layer-far.png?v=36" alt="" draggable={false} />
         </div>
         <div className="layer layer-hills">
-          <img src="/layer-hills.png" alt="" draggable={false} />
+          <img src="/layer-hills.png?v=36" alt="" draggable={false} />
         </div>
         <div className="layer layer-mid">
-          <img src="/layer-mid.png" alt="" draggable={false} />
+          <img src="/layer-mid.png?v=36" alt="" draggable={false} />
         </div>
         <div className="layer layer-grass">
-          <img src="/layer-grass.png" alt="" draggable={false} />
+          <img src="/layer-grass.png?v=36" alt="" draggable={false} />
         </div>
       </div>
 
@@ -55,15 +58,15 @@ export default function Garden({
             />
           ))}
         </ul>
-
-        {interactive && <p className="hint">OPEN A FLOWER TO EXPLORE</p>}
       </div>
 
-      {/* Foreground giant tree — sits above flowers */}
       <div className="layer layer-tree" aria-hidden="true">
-        <img src="/layer-tree.png" alt="" draggable={false} />
+        <img src="/layer-tree.png?v=40" alt="" draggable={false} />
       </div>
 
+      {interactive && <TreeSign />}
+
+      <div className="mist-veil" aria-hidden="true" />
       <div className="vignette" aria-hidden="true" />
     </main>
   )

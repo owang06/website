@@ -1,8 +1,10 @@
 /**
- * Meadow flower — hover grows; click opens simple white panel.
+ * Meadow flower — varied size/type; click opens zoom panel.
  */
 export default function Flower({ section, open, onClick }) {
   const { flower, label, id } = section
+  const size = flower.size ?? 1
+  const rotate = flower.rotate ?? 0
 
   return (
     <li
@@ -11,6 +13,8 @@ export default function Flower({ section, open, onClick }) {
         left: flower.left,
         bottom: flower.bottom,
         '--petal': flower.petal,
+        '--flower-scale': size,
+        '--flower-rotate': `${rotate}deg`,
       }}
     >
       <button
@@ -24,12 +28,11 @@ export default function Flower({ section, open, onClick }) {
         <span className="flower-plant" aria-hidden="true">
           <img
             className="flower-art"
-            src={`/flower-${id}.png?v=3`}
+            src={`/flower-${id}.png?v=27`}
             alt=""
             draggable={false}
           />
         </span>
-        <span className="flower-label">{label}</span>
       </button>
     </li>
   )
