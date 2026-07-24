@@ -11,7 +11,14 @@
   width: 100%;
   isolation: isolate;
   overflow: hidden;
-  background: #1a2e1c;
+  background: linear-gradient(
+    180deg,
+    #6a9ab8 0%,
+    #8ab0c4 28%,
+    #c4b898 55%,
+    #b8a878 72%,
+    #8a9a68 100%
+  );
   transform-origin: var(--focus-x, 50%) var(--focus-y, 70%);
   transition:
     transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
@@ -41,6 +48,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  overflow: hidden;
   background: linear-gradient(
     180deg,
     #6a9ab8 0%,
@@ -57,6 +65,26 @@
   pointer-events: none;
 }
 
+/* Horizontal bleed so parallax never flashes empty edges */
+.scene .layer {
+  left: -18%;
+  right: -18%;
+  width: auto;
+  transform-origin: center center;
+}
+
+/* Mouse parallax — smooth lag like jacewebsite */
+.parallax {
+  transition: transform 0.45s cubic-bezier(0.2, 0.49, 0.32, 0.99);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax {
+    transition: none;
+  }
+}
+
 .layer img {
   display: block;
   width: 100%;
@@ -68,7 +96,8 @@
 
 .layer-sky {
   z-index: 1;
-  inset: 0;
+  top: -8%;
+  bottom: -8%;
   height: auto;
   opacity: 0.75;
   mix-blend-mode: normal;
@@ -85,9 +114,8 @@
 
 .layer-far {
   z-index: 2;
-  top: auto;
-  bottom: 12%;
-  height: 72%;
+  top: 16%;
+  bottom: 2%;
   opacity: 0.9;
   -webkit-mask-image: linear-gradient(
     180deg,
@@ -113,9 +141,8 @@
 
 .layer-hills {
   z-index: 3;
-  top: auto;
-  bottom: 6%;
-  height: 62%;
+  top: 28%;
+  bottom: -4%;
   opacity: 0.96;
   -webkit-mask-image: linear-gradient(
     180deg,
@@ -141,16 +168,15 @@
 
 .layer-mid {
   z-index: 4;
-  top: auto;
-  bottom: 2%;
-  height: 70%;
+  top: 20%;
+  bottom: -6%;
   opacity: 1;
   -webkit-mask-image:
-    linear-gradient(90deg, transparent 0%, #000 6%, #000 96%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, #000 8%, #000 90%, transparent 100%);
+    linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
   mask-image:
-    linear-gradient(90deg, transparent 0%, #000 6%, #000 96%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, #000 8%, #000 90%, transparent 100%);
+    linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 }
@@ -158,18 +184,16 @@
 .layer-mid img {
   object-fit: cover;
   object-position: 55% bottom;
-  width: 106%;
+  width: 100%;
   height: 100%;
-  margin-left: -3%;
   filter: saturate(0.96) contrast(0.98);
 }
 
 .layer-grass {
-  z-index: 5;
+  z-index: 6;
   top: auto;
-  bottom: 0;
-  height: 20%;
-  overflow: hidden;
+  bottom: -8%;
+  height: 32%;
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 35%, #000 100%);
   mask-image: linear-gradient(180deg, transparent 0%, #000 35%, #000 100%);
 }
@@ -184,7 +208,7 @@
 .mist-veil {
   position: absolute;
   inset: 0;
-  z-index: 7;
+  z-index: 8;
   pointer-events: none;
   background: linear-gradient(
     180deg,
@@ -195,7 +219,7 @@
 }
 
 .layer-tree {
-  z-index: 30;
+  z-index: 40;
   overflow: visible;
   pointer-events: none;
 }
@@ -215,9 +239,9 @@
 /* Hanging wooden sign from the rightward branch */
 .tree-sign {
   position: absolute;
-  left: clamp(52%, 58vw, 64%);
-  top: clamp(8%, 12vh, 16%);
-  z-index: 32;
+  left: clamp(34%, 40vw, 46%);
+  top: clamp(16%, 22vh, 28%);
+  z-index: 42;
   width: 156px;
   pointer-events: none;
   filter: drop-shadow(3px 8px 10px rgba(0, 0, 0, 0.45));
@@ -333,7 +357,7 @@
   padding: 0 0.5rem;
   text-align: right;
   pointer-events: none;
-  z-index: 35;
+  z-index: 55;
 }
 
 .sky-title-brand {
@@ -345,6 +369,9 @@
   letter-spacing: 0.02em;
   color: #f7f2e6;
   text-shadow:
+    0 0 12px rgba(255, 244, 220, 0.55),
+    0 0 28px rgba(255, 230, 180, 0.35),
+    0 0 48px rgba(255, 210, 140, 0.25),
     0 2px 0 rgba(20, 40, 20, 0.25),
     0 10px 28px rgba(0, 0, 0, 0.35);
 }
@@ -355,9 +382,12 @@
   font-weight: 700;
   font-size: clamp(0.7rem, 1.5vw, 0.85rem);
   letter-spacing: 0.28em;
-  color: rgba(255, 250, 240, 0.75);
+  color: rgba(255, 250, 240, 0.85);
   margin-bottom: 0.4rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  text-shadow:
+    0 0 10px rgba(255, 244, 220, 0.45),
+    0 0 22px rgba(255, 220, 160, 0.3),
+    0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
 /* Meadow / flowers — behind giant tree */
@@ -670,7 +700,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 40;
+  z-index: 50;
   background: radial-gradient(
     ellipse 75% 70% at 55% 40%,
     transparent 42%,
@@ -701,8 +731,8 @@
   }
 
   .tree-sign {
-    left: 56%;
-    top: 11%;
+    left: 38%;
+    top: 20%;
     width: 124px;
   }
 
